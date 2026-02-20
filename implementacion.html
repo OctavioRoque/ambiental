@@ -343,6 +343,24 @@
         </div>
       </div>
     </div>
+        <!-- LISTA DE DOCUMENTOS -->
+    <div style="margin-top: 3rem;">
+      <h3 style="font-family: var(--font-display); color: var(--green-deep); margin-bottom: 1rem;">
+        Documentos subidos
+      </h3>
+
+      <table id="documentsTable" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="text-align: left; border-bottom: 2px solid var(--green-pale);">
+            <th style="padding: 0.75rem;">Nombre</th>
+            <th style="padding: 0.75rem;">Tamaño</th>
+            <th style="padding: 0.75rem;">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -353,10 +371,9 @@
     <h2 class="section-title reveal">Agenda 21 Local <em>en práctica</em></h2>
     <div class="reveal" style="max-width: 760px;">
       <iframe class="video-embed"
-        src="https://youtu.be/WWnwNO_0heQ?si=DP62aPPT6PoebI9r"
+        src="https://www.youtube.com/embed/WWnwNO_0heQ"
         title="Qué es la AGENDA 21 - PROGRAMA 21 OBJETIVOS y ACCIONES"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
       </iframe>
     </div>
   </div>
@@ -432,7 +449,57 @@
       progressEl.textContent = '✓ Subido correctamente';
       showToast('Archivo subido ✓', 'success');
     }
+    loadDocuments();
   }
+
+  async function loadDocuments() {
+  const { data, error } = await supabase
+    .storage
+    .from('agenda21-docs') 
+    .list('agenda21-local', {
+      limit: 100,
+      sortBy: { column: 'created_at', order: 'desc' }
+    });
+
+  if (error) {
+    console.error('Error listando archivos:', error);
+    return;
+  }
+
+  const tbody = document.querySelector('#documentsTable tbody');
+  tbody.innerHTML = '';
+
+  data.forEach(file => {
+    const row = document.createElement('tr');
+    row.style.borderBottom = '1px solid rgba(0,0,0,0.05)';
+
+    const sizeKB = (file.metadata?.size / 1024).toFixed(2);
+
+    row.innerHTML = `
+      <td style="padding: 0.75rem;">${file.name}</td>
+      <td style="padding: 0.75rem;">${sizeKB} KB</td>
+      <td style="padding: 0.75rem;">
+        <button onclick="downloadFile('${file.name}')" 
+          style="padding: 0.4rem 0.8rem; border-radius: 6px; border: none; background: var(--green-deep); color: white; cursor: pointer;">
+          Descargar
+        </button>
+      </td>
+    `;
+
+    tbody.appendChild(row);
+  });
+}
+
+async function downloadFile(fileName) {
+  const { data } = supabase
+    .storage
+    .from('agenda21-docs')
+    .getPublicUrl(`agenda21-local/${fileName}`);
+
+  window.open(data.publicUrl, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', loadDocuments);
 </script>
 </body>
 </html>
