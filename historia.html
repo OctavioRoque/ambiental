@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historia — Agenda 21</title>
+  <meta name="description" content="Antecedentes e historia de la Agenda 21, desde Estocolmo 1972 hasta Río de Janeiro 1992." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Agenda <span>21</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="historia.html">Historia</a></li>
+      <li><a href="objetivos.html">Objetivos</a></li>
+      <li><a href="implementacion.html">Implementación</a></li>
+      <li><a href="impacto.html">Impacto</a></li>
+    </ul>
+    <div class="nav-hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="min-height: 60vh;">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Antecedentes e historia</p>
+    <h1 class="hero-title">El camino hasta <em>Río 1992</em></h1>
+    <p class="hero-subtitle">
+      La Agenda 21 fue el resultado de décadas de debates, informes científicos y negociaciones diplomáticas que transformaron la relación entre desarrollo económico y medio ambiente.
+    </p>
+  </div>
+</section>
+
+<!-- ANTECEDENTES -->
+<section style="background: var(--white);">
+  <div class="section-inner">
+    <p class="section-label reveal">Contexto</p>
+    <h2 class="section-title reveal">Antes de <em>Río</em></h2>
+    <p class="section-desc reveal">Tres momentos clave prepararon el terreno para que en 1992 fuera posible un acuerdo de esta magnitud.</p>
+
+    <div class="card-grid card-grid-3">
+      <div class="card reveal">
+        <div class="card-icon">📘</div>
+        <h3 class="card-title">Estocolmo, 1972</h3>
+        <p class="card-text">Primera gran conferencia ambiental de la ONU. Asistieron 113 países. Se creó el PNUMA y se proclamó el Día Mundial del Medio Ambiente.</p>
+        <span class="badge badge-green" style="margin-top: 1rem; display: inline-block;">Suecia · 1972</span>
+      </div>
+      <div class="card reveal reveal-delay-1">
+        <div class="card-icon">📋</div>
+        <h3 class="card-title">Informe Brundtland, 1987</h3>
+        <p class="card-text">"Nuestro Futuro Común" definió el concepto de desarrollo sostenible y recomendó convocar una cumbre mundial. Fue la base intelectual de la Agenda 21.</p>
+        <span class="badge badge-earth" style="margin-top: 1rem; display: inline-block;">ONU · 1987</span>
+      </div>
+      <div class="card reveal reveal-delay-2">
+        <div class="card-icon">🌡️</div>
+        <h3 class="card-title">IPCC, 1988</h3>
+        <p class="card-text">El Panel Intergubernamental sobre Cambio Climático comenzó a sistematizar evidencia científica sobre el calentamiento global, dando urgencia al tema ambiental.</p>
+        <span class="badge badge-green" style="margin-top: 1rem; display: inline-block;">1988</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section>
+  <div class="section-inner">
+    <p class="section-label reveal">Línea del tiempo</p>
+    <h2 class="section-title reveal">De 1972 a <em>1992</em></h2>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2.5rem;">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1972</div>
+          <div class="timeline-heading">Conferencia de Estocolmo</div>
+          <p class="timeline-text">113 países se reúnen por primera vez para hablar de medio ambiente. Nace el PNUMA.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1980</div>
+          <div class="timeline-heading">Estrategia Mundial para la Conservación</div>
+          <p class="timeline-text">La UICN introduce el término "desarrollo sostenible" en el debate conservacionista.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1983</div>
+          <div class="timeline-heading">Comisión Brundtland</div>
+          <p class="timeline-text">La ONU crea la Comisión Mundial sobre Medio Ambiente y Desarrollo, presidida por Gro Harlem Brundtland.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1987</div>
+          <div class="timeline-heading">Informe "Nuestro Futuro Común"</div>
+          <p class="timeline-text">Define desarrollo sostenible y recomienda convocar una conferencia mundial. Se convierte en la columna vertebral de la Agenda 21.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1988</div>
+          <div class="timeline-heading">Creación del IPCC</div>
+          <p class="timeline-text">Empieza a documentar el cambio climático con evidencia científica sólida, urgiendo acción global.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1989</div>
+          <div class="timeline-heading">Convocatoria oficial</div>
+          <p class="timeline-text">La Asamblea General de la ONU convoca formalmente la Conferencia sobre Medio Ambiente y Desarrollo para 1992 en Brasil.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1990–1991</div>
+          <div class="timeline-heading">Negociaciones preparatorias</div>
+          <p class="timeline-text">Cuatro sesiones del Comité Preparatorio en Nairobi y Nueva York. Se redactan borradores de la Agenda 21 y la Declaración de Río.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">Junio 1992</div>
+          <div class="timeline-heading">La Cumbre de la Tierra</div>
+          <p class="timeline-text">178 países, 108 jefes de Estado y más de 30,000 participantes se reúnen en Río. Se adoptan la Agenda 21 y la Declaración de Río, entre otros documentos.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1997 y después</div>
+          <div class="timeline-heading">Revisiones periódicas</div>
+          <p class="timeline-text">Río+5, Johannesburgo 2002 y Río+20 (2012) revisan el progreso. En 2015 se aprueban los Objetivos de Desarrollo Sostenible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LA CUMBRE -->
+<section style="background: var(--cream-dark);">
+  <div class="section-inner">
+    <p class="section-label reveal">Junio 1992</p>
+    <h2 class="section-title reveal">La Cumbre de <em>la Tierra</em></h2>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+      <div>
+        <p class="reveal" style="color: var(--text-mid); margin-bottom: 1.2rem;">
+          Del 3 al 14 de junio de 1992, Río de Janeiro fue el centro del mundo. La CNUMAD fue la conferencia ambiental más grande celebrada hasta ese momento.
+        </p>
+        <p class="reveal" style="color: var(--text-mid); margin-bottom: 1.2rem;">
+          Participaron 172 gobiernos, 108 representados por sus jefes de Estado. Más de 2,400 representantes de ONG estuvieron presentes, y 17,000 personas asistieron al Foro de la Sociedad Civil paralelo.
+        </p>
+        <div class="blockquote reveal">
+          <p>"Estamos ante la última oportunidad de cambiar el curso de la civilización."</p>
+          <cite>— Maurice Strong, Secretario General de la CNUMAD, 1992</cite>
+        </div>
+      </div>
+
+      <div>
+        <div class="card reveal">
+          <h3 class="card-title" style="margin-bottom: 1rem;">Documentos adoptados en Río</h3>
+          <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+            <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+              <span>📜</span>
+              <div>
+                <div style="font-weight: 500; color: var(--green-deep); font-size: 0.9rem;">Agenda 21</div>
+                <div style="font-size: 0.82rem; color: var(--text-light);">Plan de acción para el desarrollo sostenible</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+              <span>🌿</span>
+              <div>
+                <div style="font-weight: 500; color: var(--green-deep); font-size: 0.9rem;">Declaración de Río</div>
+                <div style="font-size: 0.82rem; color: var(--text-light);">27 principios sobre derechos y responsabilidades ambientales</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+              <span>🦋</span>
+              <div>
+                <div style="font-weight: 500; color: var(--green-deep); font-size: 0.9rem;">Convenio de Biodiversidad</div>
+                <div style="font-size: 0.82rem; color: var(--text-light);">Tratado sobre diversidad biológica, hoy con 195 partes</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+              <span>🌡️</span>
+              <div>
+                <div style="font-weight: 500; color: var(--green-deep); font-size: 0.9rem;">Convención Marco del Clima</div>
+                <div style="font-size: 0.82rem; color: var(--text-light);">Base del Protocolo de Kioto y el Acuerdo de París</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+              <span>🌲</span>
+              <div>
+                <div style="font-weight: 500; color: var(--green-deep); font-size: 0.9rem;">Principios sobre Bosques</div>
+                <div style="font-size: 0.82rem; color: var(--text-light);">Directrices para el manejo forestal sostenible</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="download-area reveal" style="margin-top: 1rem;">
+          <div class="download-info">
+            <div class="download-icon">📄</div>
+            <div>
+              <div class="download-name">Declaración de Río 1992</div>
+              <div class="download-meta">PDF · ONU · 27 principios</div>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="downloadFile('declaracion-rio-1992.pdf', 'Declaracion_Rio_1992.pdf')">
+            Descargar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section>
+  <div class="section-inner">
+    <p class="section-label reveal">Multimedia</p>
+    <h2 class="section-title reveal">La cumbre en <em>video</em></h2>
+    <div class="reveal" style="max-width: 760px;">
+      <iframe class="video-embed"
+        src="https://youtu.be/HQqXkTdv0MU?si=sVgs1g0ZjxaNfxMm"
+        title="Discurso en la Cumbre de Río de Janeiro"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Agenda <span>21</span></div>
+        <p class="footer-desc">Sitio educativo sobre el plan de acción global adoptado en la Cumbre de la Tierra, Río de Janeiro 1992.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Páginas</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="historia.html">Historia</a></li>
+          <li><a href="objetivos.html">Objetivos</a></li>
+          <li><a href="implementacion.html">Implementación</a></li>
+          <li><a href="impacto.html">Impacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Referencias</div>
+        <ul class="footer-links">
+          <li><a href="https://sustainabledevelopment.un.org/outcomedocuments/agenda21" target="_blank">ONU — Agenda 21</a></li>
+          <li><a href="https://www.un.org/es/conferences/environment/rio1992" target="_blank">Cumbre de la Tierra</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Compartir</div>
+        <ul class="footer-links">
+          <li><a href="#" onclick="copyLink(); return false;">🔗 Copiar enlace</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

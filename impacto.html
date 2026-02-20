@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impacto — Agenda 21</title>
+  <meta name="description" content="Logros, críticas y legado de la Agenda 21. Su relación con los ODS de 2015." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    /* Barra de progreso */
+    .progress-item { margin-bottom: 1.1rem; }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.86rem;
+      margin-bottom: 0.35rem;
+      color: var(--text-mid);
+    }
+
+    .progress-label span:last-child {
+      color: var(--green-mid);
+      font-weight: 500;
+    }
+
+    .progress-bar {
+      height: 7px;
+      background: var(--green-pale);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green-mid), var(--green-light));
+      border-radius: 100px;
+      width: 0;
+      transition: width 1.2s ease;
+    }
+
+    .progress-fill.animated { width: var(--tw); }
+
+    /* Tabla comparativa */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .comp-table th {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--green-deep);
+      text-align: left;
+      padding: 0.65rem 1rem;
+      border-bottom: 2px solid var(--green-pale);
+    }
+
+    .comp-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(78, 122, 78, 0.08);
+      color: var(--text-mid);
+      vertical-align: top;
+    }
+
+    .comp-table tr:hover td { background: rgba(204, 223, 196, 0.08); }
+
+    /* Crítica card */
+    .crit {
+      border-left: 3px solid var(--accent);
+      padding: 1.2rem 1.4rem;
+      background: #fdf7f2;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin-bottom: 0.85rem;
+    }
+
+    .crit-title { font-weight: 600; color: var(--earth); font-size: 0.92rem; margin-bottom: 0.3rem; }
+    .crit-text { font-size: 0.86rem; color: var(--text-mid); }
+
+    /* ODS chips */
+    .ods-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2rem; }
+
+    .ods-chip {
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border: 1px solid;
+      transition: transform 0.15s;
+      cursor: default;
+    }
+
+    .ods-chip:hover { transform: translateY(-1px); }
+
+    /* Legacy numbers */
+    .legacy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .legacy-box {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.5rem 1rem;
+      text-align: center;
+      border: 1px solid rgba(78, 122, 78, 0.1);
+    }
+
+    .legacy-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--green-mid);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .legacy-label { font-size: 0.82rem; color: var(--text-light); }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Agenda <span>21</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="historia.html">Historia</a></li>
+      <li><a href="objetivos.html">Objetivos</a></li>
+      <li><a href="implementacion.html">Implementación</a></li>
+      <li><a href="impacto.html">Impacto</a></li>
+    </ul>
+    <div class="nav-hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="min-height: 60vh;">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Logros · Críticas · Legado</p>
+    <h1 class="hero-title">El <em>impacto</em> de<br>la Agenda 21</h1>
+    <p class="hero-subtitle">
+      Más de 30 años después de Río: ¿qué funcionó, qué no, y cómo vive su legado en los Objetivos de Desarrollo Sostenible?
+    </p>
+    <div class="hero-actions">
+      <a href="#logros" class="btn btn-primary">Ver logros</a>
+      <a href="#legado" class="btn btn-outline">Su legado</a>
+    </div>
+  </div>
+</section>
+
+<!-- EN NÚMEROS -->
+<section style="background: var(--white);" id="logros">
+  <div class="section-inner">
+    <p class="section-label reveal">En cifras</p>
+    <h2 class="section-title reveal">Lo que <em>generó</em></h2>
+
+    <div class="legacy-grid">
+      <div class="legacy-box reveal">
+        <div class="legacy-num" data-count="6000">0</div>
+        <div class="legacy-label">ciudades con Agenda 21 Local</div>
+      </div>
+      <div class="legacy-box reveal reveal-delay-1">
+        <div class="legacy-num" data-count="195">0</div>
+        <div class="legacy-label">países en convenios derivados</div>
+      </div>
+      <div class="legacy-box reveal reveal-delay-2">
+        <div class="legacy-num" data-count="17">0</div>
+        <div class="legacy-label">ODS heredados de la Agenda 21</div>
+      </div>
+      <div class="legacy-box reveal reveal-delay-3">
+        <div class="legacy-num" data-count="169">0</div>
+        <div class="legacy-label">metas de los ODS vinculadas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGROS Y CRÍTICAS -->
+<section>
+  <div class="section-inner">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem;">
+      <div>
+        <p class="section-label reveal">Avances documentados</p>
+        <h2 class="section-title reveal" style="font-size: 2rem;">Qué <em>funcionó</em></h2>
+
+        <div class="progress-item reveal">
+          <div class="progress-label"><span>Áreas marinas protegidas</span><span>+300%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="--tw: 85%;"></div></div>
+        </div>
+        <div class="progress-item reveal reveal-delay-1">
+          <div class="progress-label"><span>Acceso a agua potable global</span><span>+40%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="--tw: 68%;"></div></div>
+        </div>
+        <div class="progress-item reveal reveal-delay-2">
+          <div class="progress-label"><span>Países con legislación ambiental</span><span>+90%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="--tw: 90%;"></div></div>
+        </div>
+        <div class="progress-item reveal">
+          <div class="progress-label"><span>Áreas terrestres protegidas</span><span>+180%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="--tw: 74%;"></div></div>
+        </div>
+        <div class="progress-item reveal reveal-delay-1">
+          <div class="progress-label"><span>Energías renovables en agenda global</span><span>Consolidado</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="--tw: 60%;"></div></div>
+        </div>
+
+        <p style="font-size: 0.78rem; color: var(--text-light); margin-top: 1rem;">Fuente: PNUMA, Informe GEO-6, 2019</p>
+
+        <div style="margin-top: 2rem;">
+          <p class="section-label reveal">Logros institucionales</p>
+          <div class="card-grid card-grid-3" style="gap: 0.75rem; margin-top: 0.75rem;">
+            <div class="card reveal" style="padding: 1.1rem;">
+              <div style="font-size: 1.3rem; margin-bottom: 0.4rem;">🌿</div>
+              <div class="card-title" style="font-size: 0.88rem; margin-bottom: 0.3rem;">Convenio de Biodiversidad</div>
+              <p class="card-text" style="font-size: 0.8rem;">195 partes firmantes. Base del Protocolo de Nagoya.</p>
+            </div>
+            <div class="card reveal reveal-delay-1" style="padding: 1.1rem;">
+              <div style="font-size: 1.3rem; margin-bottom: 0.4rem;">🌡️</div>
+              <div class="card-title" style="font-size: 0.88rem; margin-bottom: 0.3rem;">Acuerdo de París</div>
+              <p class="card-text" style="font-size: 0.8rem;">Descendiente directo de la CMNUCC firmada en Río.</p>
+            </div>
+            <div class="card reveal reveal-delay-2" style="padding: 1.1rem;">
+              <div style="font-size: 1.3rem; margin-bottom: 0.4rem;">🎯</div>
+              <div class="card-title" style="font-size: 0.88rem; margin-bottom: 0.3rem;">ODS 2030</div>
+              <p class="card-text" style="font-size: 0.8rem;">17 objetivos que evolucionan directamente de la Agenda 21.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="section-label reveal">Análisis crítico</p>
+        <h2 class="section-title reveal" style="font-size: 2rem;">Dónde <em>falló</em></h2>
+
+        <div class="crit reveal">
+          <div class="crit-title">No es vinculante</div>
+          <p class="crit-text">Al ser voluntaria, muchos países adoptaron compromisos formales sin implementación real. Sin sanciones, el cumplimiento fue muy desigual.</p>
+        </div>
+        <div class="crit reveal reveal-delay-1">
+          <div class="crit-title">Financiamiento insuficiente</div>
+          <p class="crit-text">La meta del 0.7% del PIB en ayuda al desarrollo nunca fue alcanzada de forma general. El costo estimado era de 600 billones de dólares anuales.</p>
+        </div>
+        <div class="crit reveal reveal-delay-2">
+          <div class="crit-title">Las emisiones siguieron subiendo</div>
+          <p class="crit-text">A pesar de los compromisos de Río, las emisiones globales de CO₂ aumentaron más del 60% entre 1990 y 2020.</p>
+        </div>
+        <div class="crit reveal reveal-delay-3">
+          <div class="crit-title">Desinformación</div>
+          <p class="crit-text">En algunos países, especialmente en EE.UU., la Agenda 21 fue víctima de teorías conspirativas que la señalaban falsamente como un plan de control global.</p>
+        </div>
+
+        <div class="reveal" style="margin-top: 2rem; overflow-x: auto;">
+          <p class="section-label" style="margin-bottom: 0.75rem;">Agenda 21 vs ODS 2030</p>
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Aspecto</th>
+                <th>Agenda 21</th>
+                <th>ODS 2030</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Carácter</td><td>Voluntario</td><td>Voluntario</td></tr>
+              <tr><td>Objetivos</td><td>Principios amplios</td><td>17 metas medibles</td></tr>
+              <tr><td>Indicadores</td><td style="color:var(--earth);">Escasos</td><td style="color:var(--green-mid);">232 globales</td></tr>
+              <tr><td>Revisión periódica</td><td>CDS anual</td><td style="color:var(--green-mid);">FPAN + informes voluntarios</td></tr>
+              <tr><td>Agenda local</td><td style="color:var(--green-mid);">Capítulo 28</td><td style="color:var(--green-mid);">Localización ODS</td></tr>
+              <tr><td>Enfoque social</td><td style="color:var(--earth);">Secundario</td><td style="color:var(--green-mid);">Igual peso que el ambiental</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEGADO ODS -->
+<section id="legado" style="background: var(--cream-dark);">
+  <div class="section-inner">
+    <p class="section-label reveal">Herencia</p>
+    <h2 class="section-title reveal">Su legado: <em>los 17 ODS</em></h2>
+    <p class="section-desc reveal">Los Objetivos de Desarrollo Sostenible de 2015 son la evolución directa de la Agenda 21. Prácticamente todos tienen raíces en los 40 capítulos de Río.</p>
+
+    <div class="ods-chips reveal">
+      <span class="ods-chip" style="background:#fde8ea; color:#b0182b; border-color:#f5b8c0;">🍽️ ODS 1 · Pobreza</span>
+      <span class="ods-chip" style="background:#fef3d9; color:#8e6010; border-color:#f5d98a;">🌾 ODS 2 · Hambre</span>
+      <span class="ods-chip" style="background:#e8f5e4; color:#2d6e20; border-color:#a8d898;">❤️ ODS 3 · Salud</span>
+      <span class="ods-chip" style="background:#fdecea; color:#8e0f1f; border-color:#f5b8b8;">📚 ODS 4 · Educación</span>
+      <span class="ods-chip" style="background:#feece8; color:#a02010; border-color:#f5c0a8;">⚤ ODS 5 · Igualdad</span>
+      <span class="ods-chip" style="background:#e4f6fc; color:#0d6e8e; border-color:#88d8f0;">💧 ODS 6 · Agua</span>
+      <span class="ods-chip" style="background:#fef8e0; color:#806000; border-color:#f5d860;">⚡ ODS 7 · Energía</span>
+      <span class="ods-chip" style="background:#f5e8ef; color:#700a30; border-color:#d898b8;">📈 ODS 8 · Trabajo</span>
+      <span class="ods-chip" style="background:#fef0e4; color:#904000; border-color:#f5c080;">🏭 ODS 9 · Industria</span>
+      <span class="ods-chip" style="background:#fee8e8; color:#880000; border-color:#f5a8a8;">⚖️ ODS 10 · Desigualdad</span>
+      <span class="ods-chip" style="background:#fef4e4; color:#904800; border-color:#f5c888;">🏙️ ODS 11 · Ciudades</span>
+      <span class="ods-chip" style="background:#f5eedc; color:#704000; border-color:#d8b870;">♻️ ODS 12 · Consumo</span>
+      <span class="ods-chip" style="background:#e8f0e8; color:#1e4a20; border-color:#98c098;">🌡️ ODS 13 · Clima</span>
+      <span class="ods-chip" style="background:#e0f4fc; color:#065880; border-color:#70c8e8;">🐠 ODS 14 · Océanos</span>
+      <span class="ods-chip" style="background:#e8f5e0; color:#206018; border-color:#90d070;">🌿 ODS 15 · Tierra</span>
+      <span class="ods-chip" style="background:#e0eef8; color:#084060; border-color:#80b8d8;">🕊️ ODS 16 · Paz</span>
+      <span class="ods-chip" style="background:#e0e8f0; color:#081828; border-color:#708098;">🤝 ODS 17 · Alianzas</span>
+    </div>
+
+    <div class="highlight-box reveal">
+      <p class="section-label" style="color: var(--green-light);">Reflexión</p>
+      <h2 class="section-title" style="font-size: 2rem; margin-bottom: 0.75rem;">Por qué <em>importa hoy</em></h2>
+      <p style="max-width: 580px; margin-bottom: 1.5rem;">
+        La Agenda 21 fue el primer momento en que la humanidad acordó colectivamente que el desarrollo económico y la protección ambiental son inseparables. Ese principio, hoy más urgente que nunca, es su mayor legado.
+      </p>
+      <a href="objetivos.html" class="btn btn-outline" style="border-color: var(--green-light); color: var(--cream);">
+        Ver los objetivos →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DESCARGAS -->
+<section>
+  <div class="section-inner">
+    <p class="section-label reveal">Documentos</p>
+    <h2 class="section-title reveal">Informes de <em>evaluación</em></h2>
+
+    <div style="display: flex; flex-direction: column; gap: 0.85rem; max-width: 620px;">
+      <div class="download-area reveal">
+        <div class="download-info">
+          <div class="download-icon">📊</div>
+          <div>
+            <div class="download-name">Informe de la Conferencia de las Naciones Unidas sobre el Desarrollo Sostenible</div>
+            <div class="download-meta">PDF · Español · Informe oficial</div>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="downloadFile('Informe de la Conferencia de las Naciones Unidas sobre el Desarrollo Sostenible.pdf', 'Informe de la Conferencia de las Naciones Unidas sobre el Desarrollo Sostenible.pdf')">Descargar</button>
+      </div>
+      <div class="download-area reveal reveal-delay-2">
+        <div class="download-info">
+          <div class="download-icon">🎯</div>
+          <div>
+            <div class="download-name">Informe de los Objetivos de Desarrollo Sostenible 2023: Edición especial</div>
+            <div class="download-meta">PDF · ONU · Progreso de la Agenda 2030</div>
+          </div>
+        </div>
+        <button class="btn btn-outline" onclick="downloadFile('The-Sustainable-Development-Goals-Report-2023_Spanish.pdf', 'ODS_2023.pdf')">Descargar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Agenda <span>21</span></div>
+        <p class="footer-desc">Sitio educativo sobre el plan de acción global adoptado en la Cumbre de la Tierra, Río de Janeiro 1992.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Páginas</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="historia.html">Historia</a></li>
+          <li><a href="objetivos.html">Objetivos</a></li>
+          <li><a href="implementacion.html">Implementación</a></li>
+          <li><a href="impacto.html">Impacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Referencias</div>
+        <ul class="footer-links">
+          <li><a href="https://sustainabledevelopment.un.org/outcomedocuments/agenda21" target="_blank">ONU — Agenda 21</a></li>
+          <li><a href="https://sdgs.un.org/es" target="_blank">ODS 2030</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Compartir</div>
+        <ul class="footer-links">
+          <li><a href="#" onclick="copyLink(); return false;">🔗 Copiar enlace</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  // Animar barras al hacer scroll
+  const barObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.progress-fill').forEach(bar => {
+          bar.classList.add('animated');
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.progress-item').forEach(item => barObserver.observe(item));
+</script>
+</body>
+</html>

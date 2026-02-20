@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Objetivos — Agenda 21</title>
+  <meta name="description" content="Los 40 capítulos y principales objetivos de la Agenda 21." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    /* Grid de capítulos */
+    .chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .chapter-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.4rem;
+      border: 1px solid rgba(78, 122, 78, 0.1);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .chapter-card:hover {
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+
+    .chapter-num {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--green-pale);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 2rem;
+    }
+
+    .chapter-name {
+      font-weight: 500;
+      color: var(--green-deep);
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .chapter-desc {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    /* Pillar cards */
+    .pillar {
+      border-radius: var(--radius);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      color: var(--cream);
+    }
+
+    .pillar.p1 { background: #2e4a2e; }
+    .pillar.p2 { background: #3a5e3a; }
+    .pillar.p3 { background: #4a5e2e; }
+    .pillar.p4 { background: #5e4e2e; }
+
+    .pillar-roman {
+      position: absolute;
+      right: 1rem; top: 0.5rem;
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 600;
+      opacity: 0.1;
+      line-height: 1;
+    }
+
+    .pillar-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .pillar-desc {
+      font-size: 0.88rem;
+      opacity: 0.82;
+      line-height: 1.6;
+    }
+
+    .pillar-chapters {
+      margin-top: 0.85rem;
+      font-size: 0.75rem;
+      opacity: 0.6;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Agenda <span>21</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="historia.html">Historia</a></li>
+      <li><a href="objetivos.html">Objetivos</a></li>
+      <li><a href="implementacion.html">Implementación</a></li>
+      <li><a href="impacto.html">Impacto</a></li>
+    </ul>
+    <div class="nav-hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="min-height: 60vh;">
+  <div class="hero-content">
+    <p class="hero-eyebrow">40 capítulos · 4 secciones</p>
+    <h1 class="hero-title">¿Qué propone<br>la <em>Agenda 21?</em></h1>
+    <p class="hero-subtitle">
+      Más de 800 páginas de recomendaciones organizadas en 40 capítulos. Aquí un recorrido por sus objetivos más importantes.
+    </p>
+    <div class="hero-actions">
+      <a href="#secciones" class="btn btn-primary">Ver secciones</a>
+      <a href="#capitulos" class="btn btn-outline">Ver los 40 capítulos</a>
+    </div>
+  </div>
+</section>
+
+<!-- 4 PILARES -->
+<section id="secciones" style="background: var(--cream-dark);">
+  <div class="section-inner">
+    <p class="section-label reveal">Estructura</p>
+    <h2 class="section-title reveal">Las <em>4 secciones</em> principales</h2>
+
+    <div class="card-grid card-grid-2" style="margin-top: 2rem; gap: 1.25rem;">
+      <div class="pillar p1 reveal">
+        <div class="pillar-roman">I</div>
+        <div class="pillar-icon">🌍</div>
+        <div class="pillar-title">Dimensiones Sociales y Económicas</div>
+        <p class="pillar-desc">Cooperación internacional, combate a la pobreza, cambios en el consumo, dinámica demográfica, salud y asentamientos humanos.</p>
+        <div class="pillar-chapters">Capítulos 2 – 8</div>
+      </div>
+      <div class="pillar p2 reveal reveal-delay-1">
+        <div class="pillar-roman">II</div>
+        <div class="pillar-icon">🌿</div>
+        <div class="pillar-title">Conservación y Gestión de Recursos</div>
+        <p class="pillar-desc">Protección de la atmósfera, bosques, desertificación, biodiversidad, biotecnología, océanos, agua dulce y gestión de residuos.</p>
+        <div class="pillar-chapters">Capítulos 9 – 22</div>
+      </div>
+      <div class="pillar p3 reveal reveal-delay-2">
+        <div class="pillar-roman">III</div>
+        <div class="pillar-icon">🤝</div>
+        <div class="pillar-title">Papel de los Grupos Sociales</div>
+        <p class="pillar-desc">Mujeres, niños y jóvenes, pueblos indígenas, ONG, autoridades locales, trabajadores, empresas, científicos y agricultores.</p>
+        <div class="pillar-chapters">Capítulos 23 – 32</div>
+      </div>
+      <div class="pillar p4 reveal reveal-delay-3">
+        <div class="pillar-roman">IV</div>
+        <div class="pillar-icon">⚙️</div>
+        <div class="pillar-title">Medios de Ejecución</div>
+        <p class="pillar-desc">Financiamiento, transferencia tecnológica, ciencia, educación, fortalecimiento institucional y mecanismos legales internacionales.</p>
+        <div class="pillar-chapters">Capítulos 33 – 40</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJETIVOS CLAVE -->
+<section>
+  <div class="section-inner">
+    <p class="section-label reveal">Lo más importante</p>
+    <h2 class="section-title reveal">Qué busca <em>lograr</em></h2>
+
+    <div class="card-grid card-grid-2" style="margin-top: 2rem;">
+      <div class="card reveal">
+        <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+          <span style="font-size: 1.4rem;">♻️</span>
+          <div>
+            <div class="card-title">Cambiar el consumo</div>
+            <p class="card-text">Reducir el consumo insostenible —especialmente en países ricos— y promover estilos de vida dentro de los límites del planeta.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-1">
+        <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+          <span style="font-size: 1.4rem;">💧</span>
+          <div>
+            <div class="card-title">Proteger los recursos naturales</div>
+            <p class="card-text">Gestión integrada del agua, suelos, bosques, océanos y biodiversidad con un enfoque de largo plazo.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-2">
+        <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+          <span style="font-size: 1.4rem;">🌾</span>
+          <div>
+            <div class="card-title">Erradicar la pobreza</div>
+            <p class="card-text">Reconoce que la pobreza es tanto causa como consecuencia del deterioro ambiental. Propone medios de subsistencia sostenibles.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-3">
+        <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+          <span style="font-size: 1.4rem;">🔬</span>
+          <div>
+            <div class="card-title">Ciencia y tecnología</div>
+            <p class="card-text">Transferencia de tecnologías limpias a países en desarrollo y fortalecimiento de capacidades científicas locales.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOS 40 CAPÍTULOS -->
+<section id="capitulos" style="background: var(--cream-dark);">
+  <div class="section-inner">
+    <p class="section-label reveal">Índice completo</p>
+    <h2 class="section-title reveal">Los <em>40 capítulos</em></h2>
+    <p class="section-desc reveal">Cada capítulo tiene una base de acción, objetivos, actividades propuestas y medios de ejecución.</p>
+
+    <div class="chapters-grid">
+      <div class="chapter-card reveal">
+        <div class="chapter-num">1</div>
+        <div><div class="chapter-name">Preámbulo</div><p class="chapter-desc">Introducción y visión del programa.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-1">
+        <div class="chapter-num">2</div>
+        <div><div class="chapter-name">Cooperación internacional</div><p class="chapter-desc">Acelerar el desarrollo sostenible en países en desarrollo.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-2">
+        <div class="chapter-num">3</div>
+        <div><div class="chapter-name">Lucha contra la pobreza</div><p class="chapter-desc">Estrategias para erradicar la pobreza y satisfacer necesidades básicas.</p></div>
+      </div>
+      <div class="chapter-card reveal">
+        <div class="chapter-num">4</div>
+        <div><div class="chapter-name">Patrones de consumo</div><p class="chapter-desc">Transición hacia modelos de producción y consumo sostenibles.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-1">
+        <div class="chapter-num">5</div>
+        <div><div class="chapter-name">Dinámica demográfica</div><p class="chapter-desc">Relación entre población, medio ambiente y desarrollo.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-2">
+        <div class="chapter-num">6</div>
+        <div><div class="chapter-name">Salud humana</div><p class="chapter-desc">Atención primaria, enfermedades infecciosas y salud ambiental.</p></div>
+      </div>
+      <div class="chapter-card reveal">
+        <div class="chapter-num">7</div>
+        <div><div class="chapter-name">Asentamientos humanos</div><p class="chapter-desc">Planificación urbana sostenible y mejora de viviendas.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-1">
+        <div class="chapter-num">8</div>
+        <div><div class="chapter-name">Toma de decisiones</div><p class="chapter-desc">Integración del medio ambiente en políticas económicas nacionales.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-2">
+        <div class="chapter-num">9</div>
+        <div><div class="chapter-name">Protección atmosférica</div><p class="chapter-desc">Cambio climático, contaminación del aire y capa de ozono.</p></div>
+      </div>
+      <div class="chapter-card reveal">
+        <div class="chapter-num">10</div>
+        <div><div class="chapter-name">Manejo de tierras</div><p class="chapter-desc">Planificación integrada y uso sostenible del suelo.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-1">
+        <div class="chapter-num">11</div>
+        <div><div class="chapter-name">Combatir deforestación</div><p class="chapter-desc">Principios para el manejo sustentable de bosques.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-2">
+        <div class="chapter-num">12</div>
+        <div><div class="chapter-name">Zonas áridas</div><p class="chapter-desc">Lucha contra la desertificación y las sequías.</p></div>
+      </div>
+      <div class="chapter-card reveal">
+        <div class="chapter-num">13</div>
+        <div><div class="chapter-name">Ecosistemas de montaña</div><p class="chapter-desc">Desarrollo sostenible en zonas montañosas.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-1">
+        <div class="chapter-num">14</div>
+        <div><div class="chapter-name">Agricultura sostenible</div><p class="chapter-desc">Seguridad alimentaria y desarrollo rural.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-2">
+        <div class="chapter-num">15</div>
+        <div><div class="chapter-name">Biodiversidad</div><p class="chapter-desc">Conservación y uso sostenible de la diversidad biológica.</p></div>
+      </div>
+      <div class="chapter-card reveal">
+        <div class="chapter-num">16</div>
+        <div><div class="chapter-name">Biotecnología</div><p class="chapter-desc">Gestión ecológicamente racional de la biotecnología.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-1">
+        <div class="chapter-num">17</div>
+        <div><div class="chapter-name">Océanos y costas</div><p class="chapter-desc">Protección de mares, biodiversidad marina y pesquerías.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-2">
+        <div class="chapter-num">18</div>
+        <div><div class="chapter-name">Agua dulce</div><p class="chapter-desc">Calidad y suministro de los recursos hídricos.</p></div>
+      </div>
+      <div class="chapter-card reveal">
+        <div class="chapter-num">19</div>
+        <div><div class="chapter-name">Productos químicos</div><p class="chapter-desc">Gestión segura de sustancias tóxicas y peligrosas.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-1">
+        <div class="chapter-num">20</div>
+        <div><div class="chapter-name">Residuos peligrosos</div><p class="chapter-desc">Manejo y reducción de desechos peligrosos transfronterizos.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-2">
+        <div class="chapter-num">21</div>
+        <div><div class="chapter-name">Residuos sólidos</div><p class="chapter-desc">Gestión de basuras, aguas negras y reciclaje.</p></div>
+      </div>
+      <div class="chapter-card reveal">
+        <div class="chapter-num">22</div>
+        <div><div class="chapter-name">Residuos radiactivos</div><p class="chapter-desc">Manejo seguro de desechos de origen nuclear.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-1">
+        <div class="chapter-num">23–32</div>
+        <div><div class="chapter-name">Grupos principales</div><p class="chapter-desc">Mujeres, jóvenes, pueblos indígenas, ONG, autoridades locales, industria, sindicatos, ciencia y agricultores.</p></div>
+      </div>
+      <div class="chapter-card reveal reveal-delay-2">
+        <div class="chapter-num">33–40</div>
+        <div><div class="chapter-name">Medios de ejecución</div><p class="chapter-desc">Financiamiento, tecnología, educación, ciencia, instituciones y mecanismos legales para todo lo anterior.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Agenda <span>21</span></div>
+        <p class="footer-desc">Sitio educativo sobre el plan de acción global adoptado en la Cumbre de la Tierra, Río de Janeiro 1992.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Páginas</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="historia.html">Historia</a></li>
+          <li><a href="objetivos.html">Objetivos</a></li>
+          <li><a href="implementacion.html">Implementación</a></li>
+          <li><a href="impacto.html">Impacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Referencias</div>
+        <ul class="footer-links">
+          <li><a href="https://sustainabledevelopment.un.org/outcomedocuments/agenda21" target="_blank">ONU — Agenda 21</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Compartir</div>
+        <ul class="footer-links">
+          <li><a href="#" onclick="copyLink(); return false;">🔗 Copiar enlace</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

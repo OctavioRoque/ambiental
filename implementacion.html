@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Implementación — Agenda 21</title>
+  <meta name="description" content="Cómo se implementa la Agenda 21 a nivel local, nacional e internacional." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    .tabs {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .tab-btn {
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid var(--green-pale);
+      color: var(--text-mid);
+      background: transparent;
+      font-family: var(--font-body);
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active,
+    .tab-btn:hover {
+      background: var(--green-deep);
+      color: var(--cream);
+      border-color: var(--green-deep);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .step {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      padding: 1.25rem;
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid rgba(78, 122, 78, 0.1);
+      margin-bottom: 0.85rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .step:hover { box-shadow: var(--shadow-sm); }
+
+    .step-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--green-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--green-deep);
+      flex-shrink: 0;
+      font-size: 0.95rem;
+    }
+
+    .step h4 {
+      font-weight: 500;
+      color: var(--green-deep);
+      font-size: 0.92rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .step p { font-size: 0.86rem; color: var(--text-mid); }
+
+    /* Upload */
+    .upload-zone {
+      border: 2px dashed var(--green-pale);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--white);
+    }
+
+    .upload-zone:hover,
+    .upload-zone.drag-over {
+      border-color: var(--green-mid);
+      background: rgba(204, 223, 196, 0.08);
+    }
+
+    .upload-zone input[type="file"] { display: none; }
+    .upload-icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+
+    .upload-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--green-deep);
+      margin-bottom: 0.3rem;
+    }
+
+    .upload-hint { font-size: 0.82rem; color: var(--text-light); }
+
+    .country-mini {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      border: 1px solid rgba(78, 122, 78, 0.1);
+      transition: box-shadow 0.2s;
+    }
+
+    .country-mini:hover { box-shadow: var(--shadow-sm); }
+    .country-flag { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .country-name { font-family: var(--font-display); font-weight: 600; color: var(--green-deep); font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .country-desc { font-size: 0.82rem; color: var(--text-mid); }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Agenda <span>21</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="historia.html">Historia</a></li>
+      <li><a href="objetivos.html">Objetivos</a></li>
+      <li><a href="implementacion.html">Implementación</a></li>
+      <li><a href="impacto.html">Impacto</a></li>
+    </ul>
+    <div class="nav-hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="min-height: 60vh;">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Local · Nacional · Global</p>
+    <h1 class="hero-title">¿Cómo se<br><em>implementa?</em></h1>
+    <p class="hero-subtitle">
+      La Agenda 21 opera en tres escalas. Cada nivel tiene responsabilidades distintas, desde el municipio hasta la ONU.
+    </p>
+  </div>
+</section>
+
+<!-- TABS -->
+<section>
+  <div class="section-inner">
+    <p class="section-label reveal">Niveles de acción</p>
+    <h2 class="section-title reveal">Tres <em>escalas</em></h2>
+
+    <div class="tabs reveal">
+      <button class="tab-btn active" onclick="showTab('local', this)">🏘️ Local</button>
+      <button class="tab-btn" onclick="showTab('nacional', this)">🏛️ Nacional</button>
+      <button class="tab-btn" onclick="showTab('internacional', this)">🌍 Internacional</button>
+    </div>
+
+<!-- LOCAL -->
+    <div class="tab-panel active" id="panel-local">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;">
+        <div>
+          <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: var(--green-deep); margin-bottom: 0.85rem;">La Agenda 21 <em>Local</em></h3>
+          <p style="color: var(--text-mid); margin-bottom: 1rem; font-size: 0.95rem;">
+            El capítulo 28 exhortó a las autoridades locales a elaborar sus propios planes. Fue la parte más innovadora: municipios de todo el mundo hicieron diagnósticos participativos y establecieron compromisos concretos con su comunidad.
+          </p>
+          <p style="color: var(--text-mid); margin-bottom: 1.5rem; font-size: 0.95rem;">
+            En México, ciudades como <strong style="color: var(--green-deep);">Monterrey y su área metropolitana</strong> incorporaron lineamientos de la Agenda 21 en sus planes de desarrollo urbano y programas de gestión ambiental municipal durante los años 90 y 2000.
+          </p>
+          <span class="badge badge-green">Municipios de todo el mundo</span>
+        </div>
+        <div>
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <h4>Diagnóstico participativo</h4>
+              <p>Talleres con la comunidad para identificar los principales problemas ambientales y sociales del municipio.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <h4>Diseño del plan local</h4>
+              <p>Municipio y ciudadanía co-diseñan objetivos, acciones prioritarias e indicadores para dar seguimiento.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <h4>Aprobación e implementación</h4>
+              <p>El plan se aprueba en cabildo y se asignan recursos, responsables y plazos para cada acción.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div>
+              <h4>Evaluación periódica</h4>
+              <p>Revisión anual de avances con la ciudadanía. El plan puede ajustarse según los resultados.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- NACIONAL -->
+    <div class="tab-panel" id="panel-nacional">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;">
+        <div>
+          <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: var(--green-deep); margin-bottom: 0.85rem;">Estrategias <em>Nacionales</em></h3>
+          <p style="color: var(--text-mid); margin-bottom: 1rem; font-size: 0.95rem;">
+            Los gobiernos debían crear Consejos Nacionales de Desarrollo Sostenible. La mayoría de los países firmantes los establecieron en los años 90 y elaboraron informes periódicos para la ONU.
+          </p>
+          <p style="color: var(--text-mid); margin-bottom: 1.5rem; font-size: 0.95rem;">
+            A nivel nacional se fijan marcos legales, políticas sectoriales y presupuestos para integrar la sostenibilidad en las decisiones del Estado.
+          </p>
+          <div class="card-grid card-grid-3" style="gap: 0.75rem; margin-top: 1rem;">
+            <div class="country-mini">
+              <div class="country-flag">🇲🇽</div>
+              <div class="country-name">México</div>
+              <p class="country-desc">Pionero en Agendas 21 locales en ciudades como Guadalajara. Ley General del Equilibrio Ecológico.</p>
+            </div>
+            <div class="country-mini">
+              <div class="country-flag">🇧🇷</div>
+              <div class="country-name">Brasil</div>
+              <p class="country-desc">Adoptó la Agenda 21 Brasileña con 21 acciones prioritarias. Sede de la Cumbre original y Río+20.</p>
+            </div>
+            <div class="country-mini">
+              <div class="country-flag">🇩🇪</div>
+              <div class="country-name">Alemania</div>
+              <p class="country-desc">Más de 2,500 municipios con su propia Agenda 21 Local. Gran apoyo financiero gubernamental.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <h4>Marco legal e institucional</h4>
+              <p>Legislación ambiental, ministerios y estrategias nacionales de sostenibilidad con base en los compromisos de Río.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <h4>Planes sectoriales</h4>
+              <p>Energía, transporte, agricultura y residuos integran criterios de sostenibilidad en sus políticas.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <h4>Financiamiento</h4>
+              <p>Presupuesto nacional, acceso a fondos internacionales y alianzas con sector privado y sociedad civil.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div>
+              <h4>Reporte ante la ONU</h4>
+              <p>Informes voluntarios a la Comisión de Desarrollo Sostenible y, desde 2016, al Foro Político de Alto Nivel.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERNACIONAL -->
+    <div class="tab-panel" id="panel-internacional">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;">
+        <div>
+          <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: var(--green-deep); margin-bottom: 0.85rem;">Mecanismos <em>Globales</em></h3>
+          <p style="color: var(--text-mid); margin-bottom: 1rem; font-size: 0.95rem;">
+            La Agenda 21 creó la Comisión de Desarrollo Sostenible (CDS) para supervisar su implementación. En 2013 fue reemplazada por el Foro Político de Alto Nivel, que da seguimiento a los ODS.
+          </p>
+          <p style="color: var(--text-mid); margin-bottom: 1.5rem; font-size: 0.95rem;">
+            También se estableció que los países desarrollados destinarían el 0.7% de su PIB a la ayuda oficial al desarrollo. Esta meta nunca se cumplió de forma generalizada.
+          </p>
+          <div class="blockquote">
+            <p>"La Agenda 21 fue el primer llamado global coordinado entre todos los niveles de gobierno y sociedad civil."</p>
+            <cite>— PNUMA, Evaluación 2002</cite>
+          </div>
+        </div>
+        <div>
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <h4>Comisión de Desarrollo Sostenible</h4>
+              <p>Órgano de la ONU creado en 1993. Sesiones anuales con representantes de todos los países firmantes.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <h4>Transferencia de tecnología</h4>
+              <p>Mecanismos para que países desarrollados compartan tecnologías limpias con naciones en desarrollo.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <h4>Fondo para el Medio Ambiente (GEF)</h4>
+              <p>Financió proyectos de biodiversidad, clima y aguas internacionales en más de 180 países.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div>
+              <h4>Convenios ambientales</h4>
+              <p>Biodiversidad, CMNUCC y Desertificación: los tres grandes convenios internacionales derivados de Río 1992.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBIR DOCUMENTO -->
+<section style="background: var(--cream-dark);">
+  <div class="section-inner">
+    <p class="section-label reveal">Participación</p>
+    <h2 class="section-title reveal">Sube tu <em>documento</em></h2>
+    <p class="section-desc reveal">¿Tienes un plan de Agenda 21 Local, informe municipal o documento relacionado? Puedes subirlo aquí.</p>
+
+    <div class="upload-zone reveal" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+      <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg" onchange="handleUpload(this)">
+      <div class="upload-icon">📂</div>
+      <div class="upload-title">Haz clic o arrastra tu archivo</div>
+      <p class="upload-hint">PDF, Word, PowerPoint, imágenes — máx. 50 MB</p>
+    </div>
+
+    <div id="uploadStatus" style="margin-top: 1rem; display: none;">
+      <div class="download-area">
+        <div class="download-info">
+          <div class="download-icon">⏳</div>
+          <div>
+            <div class="download-name" id="uploadFileName">Subiendo...</div>
+            <div class="download-meta" id="uploadProgress">Por favor espera</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section>
+  <div class="section-inner">
+    <p class="section-label reveal">Ejemplo real</p>
+    <h2 class="section-title reveal">Agenda 21 Local <em>en práctica</em></h2>
+    <div class="reveal" style="max-width: 760px;">
+      <iframe class="video-embed"
+        src="https://youtu.be/WWnwNO_0heQ?si=DP62aPPT6PoebI9r"
+        title="Qué es la AGENDA 21 - PROGRAMA 21 OBJETIVOS y ACCIONES"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Agenda <span>21</span></div>
+        <p class="footer-desc">Sitio educativo sobre el plan de acción global adoptado en la Cumbre de la Tierra, Río de Janeiro 1992.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Páginas</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="historia.html">Historia</a></li>
+          <li><a href="objetivos.html">Objetivos</a></li>
+          <li><a href="implementacion.html">Implementación</a></li>
+          <li><a href="impacto.html">Impacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Referencias</div>
+        <ul class="footer-links">
+          <li><a href="https://sustainabledevelopment.un.org/outcomedocuments/agenda21" target="_blank">ONU — Agenda 21</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Compartir</div>
+        <ul class="footer-links">
+          <li><a href="#" onclick="copyLink(); return false;">🔗 Copiar enlace</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  function showTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Drag & drop
+  const zone = document.getElementById('uploadZone');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) processFile(file);
+  });
+
+  function handleUpload(input) {
+    if (input.files[0]) processFile(input.files[0]);
+  }
+
+  async function processFile(file) {
+    const status = document.getElementById('uploadStatus');
+    const nameEl = document.getElementById('uploadFileName');
+    const progressEl = document.getElementById('uploadProgress');
+
+    status.style.display = 'block';
+    nameEl.textContent = file.name;
+    progressEl.textContent = 'Subiendo a Supabase...';
+
+    const result = await uploadFile(file, `agenda21-local/${Date.now()}_${file.name}`);
+
+    if (result.error) {
+      progressEl.textContent = '⚠️ Error: ' + (result.error.message || 'Intenta de nuevo');
+      showToast('Error al subir el archivo', 'error');
+    } else {
+      progressEl.textContent = '✓ Subido correctamente';
+      showToast('Archivo subido ✓', 'success');
+    }
+  }
+</script>
+</body>
+</html>

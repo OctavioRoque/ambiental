@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda 21 — Desarrollo Sostenible Global</title>
+  <meta name="description" content="Sitio informativo sobre la Agenda 21, adoptada en la Cumbre de la Tierra de Río de Janeiro en 1992." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Agenda <span>21</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="historia.html">Historia</a></li>
+      <li><a href="objetivos.html">Objetivos</a></li>
+      <li><a href="implementacion.html">Implementación</a></li>
+      <li><a href="impacto.html">Impacto</a></li>
+    </ul>
+    <div class="nav-hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Río de Janeiro · 1992</p>
+    <h1 class="hero-title">
+      Un plan global para un<br><em>futuro sostenible</em>
+    </h1>
+    <p class="hero-subtitle">
+      La Agenda 21 es el programa de acción que 178 países adoptaron en la Cumbre de la Tierra para enfrentar los retos ambientales, sociales y económicos del siglo XXI.
+    </p>
+    <div class="hero-actions">
+      <a href="historia.html" class="btn btn-primary">Conocer la historia</a>
+      <a href="objetivos.html" class="btn btn-outline">Ver objetivos</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="background: var(--white); padding: 3.5rem 1.5rem;">
+  <div class="section-inner">
+    <div class="stats-row">
+      <div class="stat-box reveal">
+        <div class="stat-number" data-count="178">0</div>
+        <div class="stat-label">países signatarios</div>
+      </div>
+      <div class="stat-box reveal reveal-delay-1">
+        <div class="stat-number" data-count="40">0</div>
+        <div class="stat-label">capítulos de acción</div>
+      </div>
+      <div class="stat-box reveal reveal-delay-2">
+        <div class="stat-number" data-count="2500">0</div>
+        <div class="stat-label">recomendaciones</div>
+      </div>
+      <div class="stat-box reveal reveal-delay-3">
+        <div class="stat-number" data-count="1992">0</div>
+        <div class="stat-label">año de adopción</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ ES -->
+<section>
+  <div class="section-inner">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;">
+      <div>
+        <p class="section-label reveal">Sobre el documento</p>
+        <h2 class="section-title reveal">¿Qué es la <em>Agenda 21?</em></h2>
+        <p class="reveal" style="color: var(--text-mid); margin-bottom: 1.2rem;">
+          Es un documento no vinculante adoptado en junio de 1992 durante la Conferencia de las Naciones Unidas sobre Medio Ambiente y Desarrollo, conocida como la "Cumbre de la Tierra".
+        </p>
+        <p class="reveal" style="color: var(--text-mid); margin-bottom: 1.8rem;">
+          El nombre hace referencia al siglo XXI. Contiene 40 capítulos con recomendaciones sobre cómo los gobiernos, organizaciones y ciudadanos pueden contribuir al desarrollo sostenible.
+        </p>
+        <a href="historia.html" class="btn btn-primary reveal">Leer más sobre su historia →</a>
+      </div>
+
+      <div>
+        <div class="blockquote reveal">
+          <p>"El desarrollo sostenible es el que satisface las necesidades del presente sin comprometer la capacidad de las generaciones futuras de satisfacer sus propias necesidades."</p>
+          <cite>— Informe Brundtland, 1987 (base conceptual de la Agenda 21)</cite>
+        </div>
+
+        <div class="reveal" style="margin-top: 1.5rem;">
+          <iframe class="video-embed"
+            src="https://youtu.be/-XPqd6EJ9EQ?si=1FDy-MiS_FicwWDE"
+            title="¿Qué es la AGENDA 21?"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAS 4 SECCIONES -->
+<section style="background: var(--cream-dark);">
+  <div class="section-inner">
+    <p class="section-label reveal">Estructura del documento</p>
+    <h2 class="section-title reveal">Sus <em>4 grandes secciones</em></h2>
+    <p class="section-desc reveal">La Agenda 21 está organizada en cuatro bloques temáticos que cubren desde lo económico hasta lo institucional.</p>
+
+    <div class="card-grid card-grid-2">
+      <div class="card reveal">
+        <div class="card-icon">🌍</div>
+        <h3 class="card-title">Dimensiones Sociales y Económicas</h3>
+        <p class="card-text">Combate la pobreza, promueve cambios en los patrones de consumo, atiende la salud humana y los asentamientos sostenibles. Capítulos 2 al 8.</p>
+      </div>
+      <div class="card reveal reveal-delay-1">
+        <div class="card-icon">🌿</div>
+        <h3 class="card-title">Conservación y Gestión de Recursos</h3>
+        <p class="card-text">Protección de la atmósfera, bosques, biodiversidad, océanos, agua dulce y manejo de residuos. Capítulos 9 al 22.</p>
+      </div>
+      <div class="card reveal reveal-delay-2">
+        <div class="card-icon">🤝</div>
+        <h3 class="card-title">Fortalecimiento de Grupos Sociales</h3>
+        <p class="card-text">Reconoce el papel clave de mujeres, jóvenes, pueblos indígenas, ONG, autoridades locales, empresas y agricultores. Capítulos 23 al 32.</p>
+      </div>
+      <div class="card reveal reveal-delay-3">
+        <div class="card-icon">⚙️</div>
+        <h3 class="card-title">Medios de Ejecución</h3>
+        <p class="card-text">Mecanismos de financiamiento, transferencia de tecnología, educación y fortalecimiento institucional para hacer posible todo lo anterior. Capítulos 33 al 40.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESCARGA -->
+<section>
+  <div class="section-inner">
+    <div class="highlight-box reveal">
+      <p class="section-label" style="color: var(--green-light);">Recursos</p>
+      <h2 class="section-title" style="margin-bottom: 0.75rem;">Descarga el documento <em>oficial</em></h2>
+      <p style="margin-bottom: 1.75rem; max-width: 500px;">Accede a la versión completa en español de la Agenda 21, publicada por la ONU.</p>
+      <button class="btn btn-outline" style="border-color: var(--green-light); color: var(--cream);"
+        onclick="downloadFile('agenda21-onu-es.pdf', 'Agenda21_ONU_Español.pdf')">
+        📄 Descargar PDF
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section style="background: var(--white);">
+  <div class="section-inner">
+    <p class="section-label reveal">Ubicación</p>
+    <h2 class="section-title reveal">Río de Janeiro, <em>1992</em></h2>
+    <p class="section-desc reveal">El Riocentro fue la sede donde delegados de 178 países firmaron este acuerdo histórico.</p>
+    <div class="reveal">
+      <iframe class="map-embed"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.3534!2d-43.3743!3d-22.9774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9bda5ca25bd43f1%3A0x27aaa7c6b0adfcff!2sRiocentro!5e0!3m2!1ses!2smx!4v1234567890"
+        allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Riocentro - Sede de la Cumbre de la Tierra">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Agenda <span>21</span></div>
+        <p class="footer-desc">Sitio educativo sobre el plan de acción global adoptado en la Cumbre de la Tierra, Río de Janeiro 1992.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Páginas</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="historia.html">Historia</a></li>
+          <li><a href="objetivos.html">Objetivos</a></li>
+          <li><a href="implementacion.html">Implementación</a></li>
+          <li><a href="impacto.html">Impacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Referencias</div>
+        <ul class="footer-links">
+          <li><a href="https://sustainabledevelopment.un.org/outcomedocuments/agenda21" target="_blank">ONU — Agenda 21</a></li>
+          <li><a href="https://www.un.org/es/conferences/environment/rio1992" target="_blank">Cumbre de la Tierra</a></li>
+          <li><a href="https://sdgs.un.org/es" target="_blank">ODS 2030</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Compartir</div>
+        <ul class="footer-links">
+          <li><a href="#" onclick="copyLink(); return false;">Copiar enlace</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
