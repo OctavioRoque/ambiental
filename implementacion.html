@@ -370,14 +370,12 @@
   }
 
   // --- Descargar desde la tabla ---
-  // Se llama descargarDoc para no pisar downloadFile() de main.js
   async function descargarDoc(fileName, displayName) {
     const sb = getClient();
     if (!sb) return;
 
     showToast('Descargando...', 'info');
 
-    // Descarga el blob directamente en lugar de abrir el enlace
     const { data, error } = await sb.storage
       .from('agenda21-docs')
       .download(`agenda21-local/${fileName}`);
@@ -388,7 +386,6 @@
       return;
     }
 
-    // Crea un enlace temporal y lo clickea para forzar la descarga
     const url = URL.createObjectURL(data);
     const a = document.createElement('a');
     a.href = url;
